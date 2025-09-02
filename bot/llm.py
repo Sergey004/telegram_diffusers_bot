@@ -3,9 +3,10 @@ import asyncio
 from typing import Optional
 
 from openai import OpenAI
+from google.colab import userdata
 
 # Initialize the OpenAI client for Nvidia NIM (if API key is provided)
-_nvidia_api_key: Optional[str] = os.getenv("NVIDIA_API_KEY")
+_nvidia_api_key: Optional[str] = os.getenv("NVIDIA_API_KEY") or userdata.get('NVIDIA_API_KEY')
 _client: Optional[OpenAI] = None
 if _nvidia_api_key:
     _client = OpenAI(

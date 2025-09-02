@@ -9,6 +9,8 @@ from telegram.ext import (
     CallbackQueryHandler,
     ContextTypes,
 )
+from google.colab import userdata
+
 
 # Ensure the project root is in sys.path so absolute imports work when running this file directly
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
@@ -33,7 +35,7 @@ from bot.handlers import (
 
 async def main() -> None:
     """Entry point for the Telegram bot."""
-    token = os.getenv("TELEGRAM_TOKEN")
+    token = os.getenv("TELEGRAM_TOKEN") or userdata.get('TELEGRAM_TOKEN')
     if not token:
         raise RuntimeError("TELEGRAM_TOKEN not set in environment variables.")
 
