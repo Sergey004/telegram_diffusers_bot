@@ -86,8 +86,12 @@ async def _run_generation_task(
             steps=steps,
             lora_names=loras,
         )
-        # Send the image
-        await context.bot.send_photo(chat_id=chat_id, photo=image)
+        # Send the image as a file (document)
+        from io import BytesIO
+        image_bytes = BytesIO()
+        image.save(image_bytes, format="PNG")
+        image_bytes.seek(0)
+        await context.bot.send_document(chat_id=chat_id, document=image_bytes, filename="generated.png")
         # Edit the placeholder to indicate completion
         await progress_msg.edit_text("✅ Image generated.")
     except Exception as exc:
