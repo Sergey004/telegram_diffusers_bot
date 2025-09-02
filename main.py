@@ -1,4 +1,5 @@
 import os
+import sys
 import asyncio
 from dotenv import load_dotenv
 from telegram import Update
@@ -9,11 +10,14 @@ from telegram.ext import (
     ContextTypes,
 )
 
+# Ensure the project root is in sys.path so absolute imports work when running this file directly
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 # Load environment variables from config/.env (user should copy .env.example to .env)
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "..", "config", ".env"))
 
 # Import handler functions (to be implemented)
-from .handlers import (
+from bot.handlers import (
     start_handler,
     idea_handler,
     gen_handler,
