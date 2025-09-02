@@ -13,7 +13,7 @@ from telegram.ext import (
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "..", "config", ".env"))
 
 # Import handler functions (to be implemented)
-from .handlers import (
+from bot.handlers import (
     start_handler,
     idea_handler,
     gen_handler,
